@@ -1,8 +1,6 @@
 package com.example.myapplication.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.myapplication.database.daos.UserDao
 import com.example.myapplication.database.entities.User
@@ -12,6 +10,7 @@ abstract class RoomDB: RoomDatabase() {
 
     abstract fun userDao(): UserDao
 
+    /*
     companion object {
         var INSTANCE: RoomDB? = null
         fun getInstance(
@@ -26,4 +25,5 @@ abstract class RoomDB: RoomDatabase() {
             }
         }
     }
+    */
 }

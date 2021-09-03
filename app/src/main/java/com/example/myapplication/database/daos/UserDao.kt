@@ -8,13 +8,13 @@ import kotlinx.coroutines.flow.Flow
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addUser(user: User)
+    suspend fun addUser(user: User)
 
-    @Update(entity = User::class)
-    fun modifyUser(user: User)
+    @Update
+    suspend fun modifyUser(user: User)
 
-    @Delete(entity = User::class)
-    fun deleteUser(user: User)
+    @Delete
+    suspend fun deleteUser(user: User)
 
     @Query(value = "SELECT * FROM users ORDER BY name DESC")
     fun getAllUsers(): Flow<List<User>>

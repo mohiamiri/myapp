@@ -1,38 +1,41 @@
 package com.example.myapplication.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.RemoteApi.retrofitService
-import com.example.myapplication.database.daos.UserDao
 import com.example.myapplication.database.entities.User
+import com.example.myapplication.repository.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class UserVM(
-    private val userDao: UserDao
+@HiltViewModel
+class UserVM @Inject constructor(
+    private val repository: UserRepository
 ) : ViewModel() {
     private val _strings = MutableStateFlow(emptyList<User>())
     val strings: StateFlow<List<User>> = _strings
 
     fun fetch() {
         viewModelScope.launch {
-            _strings.value = retrofitService.fetchStrings()
+            _strings.value = repository.fetchUsers()
         }
     }
 
     fun save() {
         viewModelScope.launch {
             _strings.value.forEach {
-                userDao.addUser(it)
+                repository.addUser(it)
             }
         }
     }
 
     fun read() {
-        _strings.value = userDao.getAllUsers()
+        _strings.value = repository.getAllUsers()
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList()).value
     }
 

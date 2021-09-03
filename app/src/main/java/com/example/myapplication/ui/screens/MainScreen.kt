@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.myapplication.ui.UserVM
+import javax.inject.Inject
 
 @Composable
 fun MainScreen(
