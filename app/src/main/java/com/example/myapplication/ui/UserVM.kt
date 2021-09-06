@@ -1,15 +1,11 @@
 package com.example.myapplication.ui
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.database.entities.User
-import com.example.myapplication.repository.UserRepository
+import com.example.myapplication.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,8 +31,9 @@ class UserVM @Inject constructor(
     }
 
     fun read() {
-        _strings.value = repository.getAllUsers()
-            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList()).value
+        viewModelScope.launch {
+            repository.getAllUsers().collect { _strings.value = it }
+        }
     }
 
     fun reset() {

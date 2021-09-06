@@ -2,11 +2,10 @@ package com.example.myapplication.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.myapplication.database.LocalDataSrc
 import com.example.myapplication.database.RoomDB
 import com.example.myapplication.database.daos.UserDao
-import com.example.myapplication.repository.UserRepository
+import com.example.myapplication.repositories.UserRepository
 import com.example.myapplication.rest_api.RemoteDataSrc
 import dagger.Module
 import dagger.Provides
@@ -17,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RepositoryModule {
+class DatabaseModule {
 
     @Singleton
     @Provides

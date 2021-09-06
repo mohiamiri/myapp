@@ -1,4 +1,4 @@
-package com.example.myapplication.repository
+package com.example.myapplication.repositories
 
 import com.example.myapplication.database.LocalDataSrc
 import com.example.myapplication.rest_api.RemoteDataSrc
