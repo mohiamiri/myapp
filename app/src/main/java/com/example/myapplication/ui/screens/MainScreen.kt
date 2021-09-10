@@ -12,13 +12,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.myapplication.ui.UserVM
-import javax.inject.Inject
 
 @Composable
 fun MainScreen(
     viewModel: UserVM
 ) {
     val stringies by viewModel.strings.collectAsState()
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
@@ -59,6 +60,13 @@ fun MainScreen(
             }
         ) {
             Text(text = "reset field")
+        }
+        Button(
+            onClick = {
+                viewModel.delete()
+            }
+        ) {
+            Text(text = "delete")
         }
     }
 }

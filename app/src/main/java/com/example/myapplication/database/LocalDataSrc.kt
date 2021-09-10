@@ -17,4 +17,6 @@ class LocalDataSrc @Inject constructor(
     suspend fun modifyUser(user: User) { userDao.modifyUser(user) }
 
     suspend fun deleteUser(user: User) { userDao.deleteUser(user) }
+
+    suspend fun deleteUsers() { userDao.deleteUsers() }
 }

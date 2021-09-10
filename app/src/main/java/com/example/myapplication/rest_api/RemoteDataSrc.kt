@@ -11,6 +11,6 @@ class RemoteDataSrc @Inject constructor(
 }
 
 interface RetrofitService {
-    @GET("strings")
+    @GET("op/strings")
     suspend fun fetchUsers(): List<User>
 }

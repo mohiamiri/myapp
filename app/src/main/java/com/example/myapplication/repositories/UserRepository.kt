@@ -30,5 +30,9 @@ class UserRepository @Inject constructor(
         local.deleteUser(user)
     }
 
+    suspend fun deleteUsers() {
+        local.deleteUsers()
+    }
+
     suspend fun fetchUsers(): List<User> = remote.fetchUsers()
 }

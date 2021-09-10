@@ -15,8 +15,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-    private val baseUrl = "https://appteck.mpsservice.net/v11.1/strings.php/"
-
     @Singleton
     @Provides
     fun provideHttpClient(): OkHttpClient {
@@ -37,7 +35,8 @@ class NetworkModule {
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        gsonConverterFactory: GsonConverterFactory
+        gsonConverterFactory: GsonConverterFactory,
+        baseUrl: String
     ): Retrofit {
         return Retrofit
             .Builder()
